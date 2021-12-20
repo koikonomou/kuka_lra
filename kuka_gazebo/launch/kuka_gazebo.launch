@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="false"/>
+  <arg name="limited" default="false"/>
+  <!-- <arg name="urdf_path" default="$(find kuka_kr4_support)/urdf/kr4r600.xacro"/> -->
+  <arg name="load_robot_description" default="true" />
+
+  <!-- startup simulated worls -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+
+  <!-- load URDF, SRDF and joint_limits configuration -->
+  <include file="$(find kuka_kr4_moveit)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="$(arg load_robot_description)" />
+  </include>
+
+  <!-- spawn gazebo model -->
+<!--   <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.0 " respawn="false" output="screen" />
+   -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="200.0" />
+    <param name="tf_prefix" type="string" value="" />
+  </node>
+  
+  <!-- Fake Calibration -->
+  <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+        args="pub /calibrated std_msgs/Bool true" />
+
+  <include file="$(find kuka_kr4_moveit)/launch/ros_controllers.launch"/>
+
+
+</launch>
