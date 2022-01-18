@@ -3,44 +3,25 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
        name="kuka_kr4r600" >
 
-  <!-- common stuff -->
-  <!-- <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" /> -->
-
-  <!-- ur3 -->
-  <!-- <xacro:include filename="$(find ur_description)/urdf/ur3.urdf.xacro" /> -->
+  <!-- kuka_kr4r600 robot arm -->
   <xacro:include filename="$(find kuka_kr4_support)/urdf/kr4r600_macro.xacro"/>
-
-  <!-- arm -->
   <xacro:kuka_kr4r600 prefix="" />
 
   <link name="world" />
+  <xacro:include filename="$(find kuka_description)/urdf/table.urdf.xacro"/>
 
-<!-- box-->
-  <link name="box_link">
-    <visual>
-      <geometry>
-        <box size="1.0 1.0 0.86"/>
-      </geometry>
-    </visual>
-  </link>
-
-<!-- attach the box to the world-->
+<!-- attach the table to the world-->
   <joint name="world_joint" type="fixed">
     <parent link="world" />
-    <child link = "box_link" />
-    <origin xyz="0.0 0.0 0.43" rpy="0.0 0.0 0.0" />
+    <child link = "table_top_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
   </joint>
 
 <!-- attach the robot to the box -->
   <joint name="box_joint" type="fixed">
-    <parent link="box_link"/>
+    <parent link="table_top_link"/>
     <child link="base_link"/>
-    <origin xyz="0.0 0.0 0.43" rpy="0 0 1.57" />
+    <origin xyz="1.0 0.0 0.8" rpy="0 0 0" />
   </joint>
-
-<!--astra  -->
-<!-- <xacro:include filename="$(find manos_description)/urdf/sensors/kinect.urdf.xacro"/> -->
-<!--attach the kinect to the robot -->
- <!-- <xacro:sensor_kinect  parent="base_link"/> -->
 
 </robot>
