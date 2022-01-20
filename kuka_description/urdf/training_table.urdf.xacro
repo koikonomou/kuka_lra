@@ -4,7 +4,7 @@
        name="kuka_kr4r600" >
 
   <!-- kuka_kr4r600 robot arm -->
-  <xacro:include filename="$(find kuka_kr4_support)/urdf/kr4r600_macro.xacro"/>
+  <xacro:include filename="$(find kuka_description)/urdf/kr4r600_macro.urdf.xacro"/>
   <xacro:kuka_kr4r600 prefix="" />
 
   <link name="world" />
