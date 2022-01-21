@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="use_gui" default="false"/>
+  <arg name="rviz" default="true"/>
+  <arg name="rviz_conf" default="$(find kuka_description)/config/rviz/kuka_world.rviz"/>
+
+  <!-- Launch gazebo empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <!-- spawn gazebo model -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.0 " respawn="false" output="screen" />
+
+  <!--Load Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf)" if="$(arg rviz)"/>
+
+  <!-- load URDF -->
+  <include file="$(find kuka_description)/launch/training_table.launch"/>
+
+
+  <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="true" output="screen"/>  -->
+    <!-- <remap from="/joint_states" to="joint_states" /> -->
+
+
+
+  <include file="$(find kuka_gazebo)/launch/controller_utils.launch"/>
+
+  <!--Ros Controllers-->
+  <rosparam file="$(find kuka_gazebo)/controller/arm_controller_kuka.yaml" command="load"/>
+
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen">
+    <param name="use_gui" value="true" />
+  </node>
+
+  <!-- load other controllers -->
+  <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load joint_group_position_controller" />
+
+
+
+
+  <!-- joint_state_controller -->
+<!--   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="joint_state_controller" respawn="false" output="screen">
+  </node>
+ -->
+  <!-- <node name="arm_cartesian_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/> -->
+
+<!--   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" unless="$(arg use_gui)">
+    <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+  </node> -->
+
+<!--   <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" if="$(arg use_gui)">
+    <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+  </node> -->
+
+
+</launch>
