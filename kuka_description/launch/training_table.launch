@@ -2,8 +2,8 @@
 <launch>
 <!--KUKA KR 4 parameters files -->
   <arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface" />
-  <arg name="kinematics_config" default="$(find kuka_kr4_moveit)/config/kinematics.yaml"/>
+  <!-- <arg name="kinematics_config" default="$(find kuka_kr4_moveit)/config/kuka_default.yaml"/> -->
 
-  <param name="robot_description" command="$(find xacro)/xacro '$(find kuka_description)/urdf/training_table.urdf.xacro' --inorder" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find kuka_description)/urdf/training_table.urdf.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" />
 
 </launch>

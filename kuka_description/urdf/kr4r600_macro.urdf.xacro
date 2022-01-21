@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:include filename="$(find kuka_description)/urdf/kuka.gazebo.xacro" />
-  <xacro:include filename="$(find kuka_description)/urdf/common.gazebo.xacro" />
-
   <xacro:include filename="$(find kuka_resources)/urdf/common_materials.xacro"/>
 
-  <xacro:macro name="kuka_kr4r600" params="prefix">
+  <xacro:include filename="$(find kuka_description)/urdf/kuka.transmission.xacro" />
+  <xacro:include filename="$(find kuka_description)/urdf/kuka.gazebo.xacro" />
+
+  <xacro:macro name="kuka_kr4r600" params="prefix transmission_hw_interface:=hardware_interface/PositionJointInterface">
 
     <link name="${prefix}base_link">
 
@@ -261,6 +261,11 @@
       <child link="${prefix}tool0"/>
       <origin xyz="0 0 0" rpy="0 ${radians(90)} 0"/>
     </joint>
+
+
+  <xacro:kuka_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
+  <xacro:kuka_arm_gazebo prefix="${prefix}" />
+
 
     <!-- ROS base_link to KUKA $ROBROOT coordinate system transform -->
     <link name="${prefix}base" />

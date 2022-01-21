@@ -3,9 +3,21 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
        name="kuka_kr4r600" >
 
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+  <xacro:include filename="$(find kuka_description)/urdf/common.gazebo.xacro" />
+
+
   <!-- kuka_kr4r600 robot arm -->
   <xacro:include filename="$(find kuka_description)/urdf/kr4r600_macro.urdf.xacro"/>
-  <xacro:kuka_kr4r600 prefix="" />
+<!-- legal values:
+     - hardware_interface/PositionJointInterface
+     - hardware_interface/VelocityJointInterface
+     - hardware_interface/EffortJointInterface
+-->
+
+  <xacro:kuka_kr4r600 prefix="" transmission_hw_interface="$(arg transmission_hw_interface)"/>
+
 
   <link name="world" />
   <xacro:include filename="$(find kuka_description)/urdf/table.urdf.xacro"/>
