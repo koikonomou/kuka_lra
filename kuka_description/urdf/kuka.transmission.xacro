@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:macro name="kuka_arm_transmission" params="prefix hw_interface">
+  <xacro:macro name="kuka_arm_transmission" params="prefix">
 
+    <xacro:kuka_kr4r600 prefix="${prefix}" />
     <transmission name="${prefix}joint_a1_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}joint_a1">
-        <hardwareInterface>${hw_interface}</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}joint_a1_motor">
         <mechanicalReduction>1</mechanicalReduction>
@@ -16,7 +17,7 @@
     <transmission name="${prefix}joint_a2_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}joint_a2">
-        <hardwareInterface>${hw_interface}</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}joint_a2_motor">
         <mechanicalReduction>1</mechanicalReduction>
@@ -26,7 +27,7 @@
     <transmission name="${prefix}joint_a3_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}joint_a3">
-        <hardwareInterface>${hw_interface}</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}joint_a3_motor">
         <mechanicalReduction>1</mechanicalReduction>
@@ -36,9 +37,9 @@
     <transmission name="${prefix}joint_a4_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}joint_a4">
-        <hardwareInterface>${hw_interface}</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="$joint_a4_motor">
+      <actuator name="${prefix}joint_a4_motor">
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
@@ -46,7 +47,7 @@
     <transmission name="${prefix}joint_a5_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}joint_a5">
-        <hardwareInterface>${hw_interface}</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}joint_a5_motor">
         <mechanicalReduction>1</mechanicalReduction>
@@ -56,7 +57,7 @@
     <transmission name="${prefix}joint_a6_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}joint_a6">
-        <hardwareInterface>${hw_interface}</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}joint_a6_motor">
         <mechanicalReduction>1</mechanicalReduction>

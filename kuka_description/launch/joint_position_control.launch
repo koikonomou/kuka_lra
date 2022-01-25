@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- <arg name="use_gui" default="true"/> -->
+
+  <!-- load the joint state controller -->
+  <rosparam file="$(find kuka_kr4_moveit)/config/joint_state_controller.yaml" command="load" />
+  <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller"  />
+ 
+  <rosparam file="$(find kuka_kr4_moveit)/config/position_controllers.yaml" command="load"/>
+  <node name="controller_spawner" pkg ="controller_manager" type="spawner" args="spawn joint_a1_position_controller joint_a2_position_controller joint_a3_position_controller joint_a4_position_controller joint_a5_position_controller joint_a6_position_controller"/>
+
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" if="$(arg use_gui)"/> -->
+
+</launch>

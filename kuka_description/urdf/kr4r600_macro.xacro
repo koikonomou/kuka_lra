@@ -1,15 +1,25 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                iyy="1.0" iyz="0.0"
+                izz="1.0" />
+        </inertial>
+    </xacro:macro>
+
   <xacro:include filename="$(find kuka_resources)/urdf/common_materials.xacro"/>
 
-  <xacro:include filename="$(find kuka_description)/urdf/kuka.transmission.xacro" />
-  <xacro:include filename="$(find kuka_description)/urdf/kuka.gazebo.xacro" />
+  <!-- <xacro:include filename="$(find kuka_description)/urdf/kuka.transmission.xacro" /> -->
+  <!-- <xacro:include filename="$(find kuka_description)/urdf/kuka.gazebo.xacro" /> -->
 <!-- 
   <xacro:macro name="kuka_kr4r600" params="prefix transmission_hw_interface:=hardware_interface/EffortJointInterface"> -->
-
+  <xacro:include filename="$(find kuka_resources)/urdf/common_constants.xacro"/>
+  <xacro:macro name="kuka_kr4r600" params="prefix">
     <link name="${prefix}base_link">
-
+    <xacro:default_inertial mass="1"/>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -24,7 +34,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/base_link.stl" />
         </geometry>
       </collision>
-
+<!-- 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="7"/>
@@ -32,12 +42,12 @@
             ixx="30160574464.000000" ixy="268355824.000000" ixz="396794944.000000"
             iyy="49449443328.00000" iyz="74363816.000000"
             izz="47570612224.000000"/>
-      </inertial>
+      </inertial> -->
 
     </link>
 
     <link name="${prefix}link_1">
-
+    <xacro:default_inertial mass="1"/>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -52,7 +62,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_1.stl" />
         </geometry>
       </collision>
-
+<!-- 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="5"/>
@@ -60,12 +70,12 @@
           ixx="29069639680.000000" ixy="16955148.000000" ixz="-75115704.000000"
           iyy="18764271616.000000" iyz="180538688.000000"
           izz="20780234752.000000"/>
-      </inertial>
+      </inertial> -->
 
     </link>
 
     <link name="${prefix}link_2">
-
+    <xacro:default_inertial mass="1"/>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -80,7 +90,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_2.stl" />
         </geometry>
       </collision>
-
+<!-- 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="6"/>
@@ -89,10 +99,11 @@
           iyy="54759739392.000000" iyz="2741744.250000"
           izz="62598627328.000000"/>
       </inertial>
-
+ -->
     </link>
 
     <link name="${prefix}link_3">
+    <xacro:default_inertial mass="1"/>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -107,7 +118,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_3.stl" />
         </geometry>
       </collision>
-
+<!-- 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="4"/>
@@ -115,12 +126,12 @@
           ixx="3538344960.000000" ixy="91869584.000000" ixz="-1087638528.000000"
           iyy="10409157632.000000" iyz="13806910.000000"
           izz="10024766464.000000"/>
-      </inertial>
+      </inertial> -->
 
     </link>
 
     <link name="${prefix}link_4">
-
+    <xacro:default_inertial mass="1"/>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -135,7 +146,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_4.stl" />
         </geometry>
       </collision>
-
+<!-- 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="3"/>
@@ -143,12 +154,12 @@
           ixx="2312632576.000000" ixy="-262303920.000000" ixz="26849928.000000"
           iyy="2560956160.000000" iyz="-46212612.000000"
           izz="3653170944.000000"/>
-      </inertial>
+      </inertial> -->
 
     </link>
 
     <link name="${prefix}link_5">
-
+    <xacro:default_inertial mass="1"/>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -163,7 +174,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_5.stl" />
         </geometry>
       </collision>
-
+<!-- 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="1.5"/>
@@ -171,12 +182,12 @@
           ixx="474922912.000000" ixy="-5465426.000000" ixz="-131389.812500"
           iyy=" 642145344.000000" iyz="98441.296875"
           izz="684424448.000000"/>
-      </inertial>
+      </inertial> -->
 
     </link>
 
     <link name="${prefix}link_6">
-
+    <xacro:default_inertial mass="1"/>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -191,7 +202,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_6.stl" />
         </geometry>
       </collision>
-
+<!-- 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="0.5"/>
@@ -199,7 +210,7 @@
           ixx="9503564.000000" ixy="-344.500275" ixz="2999.466064"
           iyy=" 6104710.000000" iyz="2659.174805"
           izz="6102781.000000"/>
-      </inertial>
+      </inertial> -->
 
     </link>
 
@@ -213,7 +224,7 @@
       <parent link="${prefix}base_link"/>
       <child link="${prefix}link_1"/>
       <axis xyz="0 0 -1"/>
-      <limit lower="${radians(-170)}" upper="${radians(170)}" effort="0" velocity="${radians(530)}"/>
+      <limit lower="${-DEG2RAD * 170}" upper="${DEG2RAD * 170}" effort="100" velocity="${DEG2RAD* 530}"/>
     </joint>
 
     <joint name="${prefix}joint_a2" type="revolute">
@@ -221,7 +232,7 @@
       <parent link="${prefix}link_1"/>
       <child link="${prefix}link_2"/>
       <axis xyz="0 1 0"/>
-      <limit lower="${radians(-195)}" upper="${radians(40)}" effort="0" velocity="${radians(529)}"/>
+      <limit lower="${-DEG2RAD * 195}" upper="${DEG2RAD * 40}" effort="100" velocity="${DEG2RAD *529}"/>
     </joint>
 
     <joint name="${prefix}joint_a3" type="revolute">
@@ -229,7 +240,7 @@
       <parent link="${prefix}link_2"/>
       <child link="${prefix}link_3"/>
       <axis xyz="0 1 0"/>
-      <limit lower="${radians(-115)}" upper="${radians(150)}" effort="0" velocity="${radians(538)}"/>
+      <limit lower="${-DEG2RAD * 115}" upper="${DEG2RAD * 150}" effort="100" velocity="${DEG2RAD * 538}"/>
     </joint>
 
     <joint name="${prefix}joint_a4" type="revolute">
@@ -237,7 +248,7 @@
       <parent link="${prefix}link_3"/>
       <child link="${prefix}link_4"/>
       <axis xyz="-1 0 0"/>
-      <limit lower="${radians(-185)}" upper="${radians(185)}" effort="0" velocity="${radians(600)}"/>
+      <limit lower="${-DEG2RAD * 185}" upper="${DEG2RAD * 185}" effort="100" velocity="${DEG2RAD * 600}"/>
     </joint>
 
     <joint name="${prefix}joint_a5" type="revolute">
@@ -245,7 +256,7 @@
       <parent link="${prefix}link_4"/>
       <child link="${prefix}link_5"/>
       <axis xyz="0 1 0"/>
-      <limit lower="${radians(-120)}" upper="${radians(120)}" effort="0" velocity="${radians(600)}"/>
+      <limit lower="${-DEG2RAD * 120}" upper="${DEG2RAD * 120}" effort="100" velocity="${DEG2RAD * 600}"/>
     </joint>
 
     <joint name="${prefix}joint_a6" type="revolute">
@@ -253,20 +264,20 @@
       <parent link="${prefix}link_5"/>
       <child link="${prefix}link_6"/>
       <axis xyz="-1 0 0"/>
-      <limit lower="${radians(-350)}" upper="${radians(350)}" effort="0" velocity="${radians(800)}"/>
+      <limit lower="${-DEG2RAD * 350}" upper="${DEG2RAD* 350}" effort="100" velocity="${DEG2RAD* 800}"/>
     </joint>
 
     <joint name="${prefix}joint_a6-tool0" type="fixed">
       <parent link="${prefix}link_6"/>
       <child link="${prefix}tool0"/>
-      <origin xyz="0 0 0" rpy="0 ${radians(90)} 0"/>
+      <origin xyz="0 0 0" rpy="0 ${DEG2RAD * 90} 0"/>
     </joint>
 
 
-  <xacro:kuka_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
+<!--   <xacro:kuka_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
   <xacro:kuka_arm_gazebo prefix="${prefix}" />
 
-
+ -->
     <!-- ROS base_link to KUKA $ROBROOT coordinate system transform -->
     <link name="${prefix}base" />
     <joint name="${prefix}base_link-base" type="fixed">
