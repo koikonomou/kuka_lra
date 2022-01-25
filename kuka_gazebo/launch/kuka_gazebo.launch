@@ -19,8 +19,10 @@
   <include file="$(find kuka_description)/launch/training_table.launch"/>
 
   <!-- spawn gazebo model -->
-  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.0 " respawn="false" output="screen" />
-  
+  <!-- <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.0 " respawn="false" output="screen" /> -->
+  <!-- spawn gazebo model -->
+  <node name="kr4r600_loader" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model kuka_kr4r600" respawn="false" output="screen" />
+
 
   <!--Load Rviz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf)" if="$(arg rviz)"/>
