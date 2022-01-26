@@ -11,6 +11,7 @@
     </xacro:macro>
 
   <xacro:include filename="$(find kuka_resources)/urdf/common_materials.xacro"/>
+  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
 
   <!-- <xacro:include filename="$(find kuka_description)/urdf/kuka.transmission.xacro" /> -->
   <!-- <xacro:include filename="$(find kuka_description)/urdf/kuka.gazebo.xacro" /> -->
@@ -34,7 +35,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/base_link.stl" />
         </geometry>
       </collision>
-<!-- 
+
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="7"/>
@@ -42,7 +43,7 @@
             ixx="30160574464.000000" ixy="268355824.000000" ixz="396794944.000000"
             iyy="49449443328.00000" iyz="74363816.000000"
             izz="47570612224.000000"/>
-      </inertial> -->
+      </inertial>
 
     </link>
 
@@ -62,7 +63,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_1.stl" />
         </geometry>
       </collision>
-<!-- 
+
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="5"/>
@@ -70,7 +71,7 @@
           ixx="29069639680.000000" ixy="16955148.000000" ixz="-75115704.000000"
           iyy="18764271616.000000" iyz="180538688.000000"
           izz="20780234752.000000"/>
-      </inertial> -->
+      </inertial>
 
     </link>
 
@@ -90,7 +91,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_2.stl" />
         </geometry>
       </collision>
-<!-- 
+
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="6"/>
@@ -99,7 +100,7 @@
           iyy="54759739392.000000" iyz="2741744.250000"
           izz="62598627328.000000"/>
       </inertial>
- -->
+
     </link>
 
     <link name="${prefix}link_3">
@@ -118,7 +119,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_3.stl" />
         </geometry>
       </collision>
-<!-- 
+
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="4"/>
@@ -126,7 +127,7 @@
           ixx="3538344960.000000" ixy="91869584.000000" ixz="-1087638528.000000"
           iyy="10409157632.000000" iyz="13806910.000000"
           izz="10024766464.000000"/>
-      </inertial> -->
+      </inertial>
 
     </link>
 
@@ -146,7 +147,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_4.stl" />
         </geometry>
       </collision>
-<!-- 
+
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="3"/>
@@ -154,7 +155,7 @@
           ixx="2312632576.000000" ixy="-262303920.000000" ixz="26849928.000000"
           iyy="2560956160.000000" iyz="-46212612.000000"
           izz="3653170944.000000"/>
-      </inertial> -->
+      </inertial>
 
     </link>
 
@@ -174,7 +175,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_5.stl" />
         </geometry>
       </collision>
-<!-- 
+
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="1.5"/>
@@ -182,7 +183,7 @@
           ixx="474922912.000000" ixy="-5465426.000000" ixz="-131389.812500"
           iyy=" 642145344.000000" iyz="98441.296875"
           izz="684424448.000000"/>
-      </inertial> -->
+      </inertial>
 
     </link>
 
@@ -202,7 +203,7 @@
           <mesh filename="package://kuka_kr4_support/meshes/kr4r600/collision/link_6.stl" />
         </geometry>
       </collision>
-<!-- 
+
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="0.5"/>
@@ -210,7 +211,7 @@
           ixx="9503564.000000" ixy="-344.500275" ixz="2999.466064"
           iyy=" 6104710.000000" iyz="2659.174805"
           izz="6102781.000000"/>
-      </inertial> -->
+      </inertial>
 
     </link>
 
@@ -218,6 +219,29 @@
     <link name="${prefix}tool0"/>
 
 
+  <!-- Camera -->
+    <link name="camera_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+      <box size="${camera_link} ${camera_link} ${camera_link}"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+      <box size="${camera_link} ${camera_link} ${camera_link}"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
 
     <joint name="${prefix}joint_a1" type="revolute">
       <origin xyz="0 0 0.33" rpy="0 0 0"/>
@@ -273,6 +297,13 @@
       <origin xyz="0 0 0" rpy="0 ${DEG2RAD * 90} 0"/>
     </joint>
 
+   <joint name="camera_joint" type="fixed">
+      <axis xyz="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 30 0"/>
+      <parent link="${prefix}tool0"/>
+      <child link="camera_link"/>
+    </joint>
+
 
 <!--   <xacro:kuka_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
   <xacro:kuka_arm_gazebo prefix="${prefix}" />
@@ -285,6 +316,7 @@
       <parent link="${prefix}base_link"/>
       <child link="${prefix}base"/>
     </joint>
+
   </xacro:macro>
 
 </robot>
