@@ -3,7 +3,6 @@
 <xacro:include filename="$(find kuka_description)/urdf/kr4r600_macro.xacro"/>
 <xacro:macro name="kuka_kr4r600_gazebo" params="prefix">
 
-  <!-- get base kuka kr6r900sixx model -->
   <xacro:kuka_kr4r600 prefix="${prefix}" />
 
   <!-- transmission list -->
