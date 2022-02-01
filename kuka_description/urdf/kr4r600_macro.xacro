@@ -15,10 +15,10 @@
 
   <!-- <xacro:include filename="$(find kuka_description)/urdf/kuka.transmission.xacro" /> -->
   <!-- <xacro:include filename="$(find kuka_description)/urdf/kuka.gazebo.xacro" /> -->
-<!-- 
-  <xacro:macro name="kuka_kr4r600" params="prefix transmission_hw_interface:=hardware_interface/EffortJointInterface"> -->
+
+  <xacro:macro name="kuka_kr4r600" params="prefix transmission_hw_interface:=hardware_interface/EffortJointInterface">
   <xacro:include filename="$(find kuka_resources)/urdf/common_constants.xacro"/>
-  <xacro:macro name="kuka_kr4r600" params="prefix">
+  <!-- <xacro:macro name="kuka_kr4r600" params="prefix"> -->
     <link name="${prefix}base_link">
     <xacro:default_inertial mass="1"/>
       <visual>
