@@ -14,6 +14,7 @@
        xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics">
 
   <property name="table_height" value="0.8" />
+  <property name="table_radius" value="0.6" />
   <property name="table_width" value="1.2" />
   <property name="table_depth" value="1.2" />
   <property name="leg_radius" value="0.02" />
@@ -38,13 +39,15 @@
     <visual>
       <origin xyz="${table_x} ${table_y} ${table_z+table_height-table_top_thickness/2}" />
       <geometry>
-        <box size="${table_width} ${table_depth} ${table_top_thickness}" />
+        <!-- <box size="${table_width} ${table_depth} ${table_top_thickness}" /> -->
+        <cylinder length="${table_top_thickness}" radius="${table_radius}"/>
       </geometry>
     </visual> 
     <collision>
       <origin xyz="${table_x} ${table_y} ${table_z+table_height-table_top_thickness/2}" />
       <geometry>
-        <box size="${table_width} ${table_depth} ${table_top_thickness}" />
+        <cylinder length="${table_top_thickness}" radius="${table_radius}"/>
+        <!-- <box size="${table_width} ${table_depth} ${table_top_thickness}" /> -->
       </geometry>
     </collision>
   </link>
@@ -58,7 +61,7 @@
 
   <joint name="leg1_joint" type="fixed" >
     <parent link="table_top_link" />
-    <origin xyz="${table_x+table_width/2} ${table_y+table_depth/2} ${table_z+table_height}" rpy="0 0 0" />
+    <origin xyz="${table_x+table_radius/2} ${table_y+table_radius/2} ${table_z+table_height }" rpy="0 0 0" />
     <child link="leg1_link" />
   </joint> 
   <link name="leg1_link">
@@ -83,7 +86,7 @@
     </collision>
   </link>
   <gazebo reference="leg1_link">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
     <mu1>1000.0</mu1>
     <mu2>1000.0</mu2>
     <kp>10000000.0</kp>
@@ -93,7 +96,7 @@
 
   <joint name="leg2_joint" type="fixed" >
     <parent link="table_top_link" />
-    <origin xyz="${table_x-table_width/2} ${table_y+table_depth/2} ${table_z+table_height}" rpy="0 0 0" />
+    <origin xyz="${table_x-table_radius/2} ${table_y+table_radius/2} ${table_z+table_height }" rpy="0 0 0" />
     <child link="leg2_link" />
   </joint> 
   <link name="leg2_link">
@@ -118,7 +121,7 @@
     </collision>
   </link>
   <gazebo reference="leg2_link">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
     <mu1>1000.0</mu1>
     <mu2>1000.0</mu2>
     <kp>10000000.0</kp>
@@ -128,7 +131,7 @@
 
   <joint name="leg3_joint" type="fixed" >
     <parent link="table_top_link" />
-    <origin xyz="${table_x+table_width/2} ${table_y-table_depth/2} ${table_z+table_height}" rpy="0 0 0" />
+    <origin xyz="${table_x+table_radius/2} ${table_y-table_radius/2} ${table_z+table_height}" rpy="0 0 0" />
     <child link="leg3_link" />
   </joint> 
   <link name="leg3_link">
@@ -153,7 +156,7 @@
     </collision>
   </link>
   <gazebo reference="leg3_link">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
     <mu1>1000.0</mu1>
     <mu2>1000.0</mu2>
     <kp>10000000.0</kp>
@@ -163,7 +166,7 @@
 
   <joint name="leg4_joint" type="fixed" >
     <parent link="table_top_link" />
-    <origin xyz="${table_x-table_width/2} ${table_y-table_depth/2} ${table_z+table_height}" rpy="0 0 0" />
+    <origin xyz="${table_x-table_radius/2} ${table_y-table_radius/2} ${table_z+table_height }" rpy="0 0 0" />
     <child link="leg4_link" />
   </joint> 
   <link name="leg4_link">
@@ -188,7 +191,7 @@
     </collision>
   </link>
   <gazebo reference="leg4_link">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
     <mu1>1000.0</mu1>
     <mu2>1000.0</mu2>
     <kp>10000000.0</kp>
