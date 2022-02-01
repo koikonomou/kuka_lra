@@ -32,7 +32,27 @@
   <joint name="table_joint" type="fixed">
     <parent link="table_top_link"/>
     <child link="base_link"/>
-    <origin xyz="1.0 0.0 0.8" rpy="0 0 0" />
+    <origin xyz="0 0.0 0.8" rpy="0 0 0" />
+  </joint>
+
+<!--Add box to the table-->
+  <link name="box_link">
+    <visual>
+      <geometry>
+        <box size="0.10 0.10 0.10"/>
+      </geometry>
+    </visual>
+  </link>
+  <gazebo reference="box_link">
+    <material>Gazebo/Red</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+
+  <!-- attach the box to the table-->
+  <joint name="box_joint" type="fixed">
+    <parent link="table_top_link" />
+    <child link = "box_link" />
+    <origin xyz="0.5 0.0 0.85" rpy="0.0 0.0 0.0" />
   </joint>
 
 </robot>
