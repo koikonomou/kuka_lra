@@ -4,6 +4,7 @@
   <arg name="paused" default="false"/>
   <arg name="gui" default="true"/>
   <arg name="use_gui" default="true"/>
+  <arg name="use_sim_time" default="true"/>
   <arg name="rviz" default="true"/>
   <arg name="rviz_conf" default="$(find kuka_description)/config/rviz/kuka_world.rviz"/>
 
@@ -12,8 +13,8 @@
     <arg name="world_name" value="worlds/empty.world"/>
     <arg name="paused" value="$(arg paused)"/>
     <arg name="gui" value="$(arg gui)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
   </include>
-
 
   <!-- load URDF -->
   <include file="$(find kuka_description)/launch/training_table.launch"/>
@@ -28,19 +29,11 @@
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf)" if="$(arg rviz)"/>
 
   <!--Ros Controllers-->
-  <rosparam file="$(find kuka_kr4_moveit)/config/ros_controllers.yaml" command="load"/>
+  <!-- <rosparam file="$(find kuka_kr4_moveit)/config/ros_controllers.yaml" command="load"/> -->
 
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="true" output="screen"> 
-    <remap from="/joint_states" to="joint_states" />
-  </node>
-
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" unless="$(arg use_gui)">
-    <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
-  </node>
-
-  <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" if="$(arg use_gui)">
-    <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
-  </node>
+  <include file="$(find kuka_gazebo)/launch/controller_utils.launch" >
+    <arg name="use_gui" value="$(arg use_gui)"/>
+  </include>
 
 
 </launch>
