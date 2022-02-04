@@ -3,6 +3,8 @@
 
   <arg name="paused" default="false"/>
   <arg name="gui" default="true"/>
+  <arg name="use_gui" default="false"/>
+
   <arg name="use_sim_time" default="true"/>
   <arg name="rviz" default="true"/>
   <arg name="rviz_conf" default="$(find kuka_description)/config/rviz/kuka_world.rviz"/>

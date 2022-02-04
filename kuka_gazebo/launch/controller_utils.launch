@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="use_gui" default="false"/>
+
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find kuka_kr4_moveit)/config/position_controllers.yaml" command="load"/>
 
