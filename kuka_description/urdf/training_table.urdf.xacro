@@ -24,15 +24,15 @@
 <!-- attach the table to the world-->
   <joint name="world_joint" type="fixed">
     <parent link="world" />
-    <child link = "table_top_link" />
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.8" rpy="0.0 0.0 0.0" />
   </joint>
 
 <!-- attach the robot to the table -->
   <joint name="table_joint" type="fixed">
-    <parent link="table_top_link"/>
-    <child link="base_link"/>
-    <origin xyz="0 0.0 0.8" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="table_top_link"/>
+    <origin xyz="0 0.0 -0.8" rpy="0 0 0" />
   </joint>
 
 <!--Add box to the table-->
@@ -42,11 +42,21 @@
         <box size="0.10 0.10 0.10"/>
       </geometry>
     </visual>
+    <collision>
+      <origin xyz ="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.10 0.10 0.10"/>
+      </geometry>
+    </collision>
   </link>
   <gazebo reference="box_link">
     <material>Gazebo/Red</material>
-    <turnGravityOff>true</turnGravityOff>
+    <mu1>50.0</mu1>
+    <mu2>50.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
   </gazebo>
+
 
   <!-- attach the box to the table-->
   <joint name="box_joint" type="fixed">
