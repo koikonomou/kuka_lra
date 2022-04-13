@@ -14,7 +14,6 @@ find_package(catkin REQUIRED COMPONENTS
   gazebo_ros_control
   joint_state_controller
   joint_trajectory_controller
-  kuka_description
   robot_state_publisher
   moveit_kinematics
 )
