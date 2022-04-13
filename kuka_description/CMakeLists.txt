@@ -5,8 +5,8 @@ project(kuka_description)
 add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
-    kuka_gazebo
-    kuka_kr4_moveit
+    # kuka_gazebo
+    # kuka_kr4_moveit
     kuka_kr4_support
 )
 
