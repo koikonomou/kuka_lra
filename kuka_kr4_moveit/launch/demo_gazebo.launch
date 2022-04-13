@@ -43,7 +43,7 @@
 
   <arg name="use_sim_time" default="true"/>
   <arg name="rviz" default="true"/>
-  <arg name="rviz_conf" default="$(find kuka_description)/config/rviz/kuka_world.rviz"/>
+  <!-- <arg name="rviz_conf" default="$(find kuka_description)/config/rviz/kuka_world.rviz"/> -->
 
   <!-- Launch gazebo empty world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -55,13 +55,14 @@
   <!-- If needed, broadcast static tf for robot root -->
   
 
+  <include file="$(find kuka_kr4_moveit)/launch/ros_controllers.launch"/>
 
-  <include file="$(find kuka_gazebo)/launch/controller_utils.launch" >
-    <arg name="use_gui" value="$(arg use_gui)"/>
-  </include>
+  <!-- <include file="$(find kuka_gazebo)/launch/controller_utils.launch" > -->
+    <!-- <arg name="use_gui" value="$(arg use_gui)"/> -->
+  <!-- </include> -->
 
   <!-- Given the published joint states, publish tf for the robot links -->
-  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" /> -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
 
   <!-- Run the main MoveIt! executable without trajectory execution (we do not have controllers configured by default) -->
   <include file="$(find kuka_kr4_moveit)/launch/move_group.launch">
