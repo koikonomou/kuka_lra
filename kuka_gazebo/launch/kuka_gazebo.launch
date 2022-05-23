@@ -20,6 +20,7 @@
   <!-- load URDF -->
   <include file="$(find kuka_description)/launch/training_table.launch"/>
 
+  <node pkg="tf" type="static_transform_publisher" name="camera" args="0.000 -0.020 0.000 0.000 0.000 0.000 1.000 /camera_link /hokuyo_link  100"/>
 
   <!-- spawn gazebo model -->
   <node name="kr4r600_loader" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model kuka_kr4r600" respawn="false" output="screen" />
