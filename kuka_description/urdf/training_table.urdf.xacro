@@ -60,9 +60,9 @@
 
   <!-- attach the box to the table-->
   <joint name="box_joint" type="fixed">
-    <parent link="table_top_link" />
+    <parent link="base_link" />
     <child link = "box_link" />
-    <origin xyz="0.5 0.0 0.85" rpy="0.0 0.0 0.0" />
+    <origin xyz="0.5 0.0 0.05" rpy="0.0 0.0 0.0" />
   </joint>
 
 </robot>
