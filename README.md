@@ -1,4 +1,5 @@
 # Kuka Package
 
 Kuka package for kr4r600 robot arm located in LRA lab
-![image description](imgs/IMG_20221207_162740.jpg)
+<!-- ![image description](imgs/IMG_20221207_162740.jpg) -->
+<img src="imgs/IMG_20221207_162740.jpg" width="128"/>
