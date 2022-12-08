@@ -224,16 +224,38 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-      <box size="${camera_link} ${camera_link} ${camera_link}"/>
+          <box size="0.05 0.05 0.05"/>
         </geometry>
       </collision>
 
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-      <box size="${camera_link} ${camera_link} ${camera_link}"/>
+          <box size="0.05 0.05 0.05"/>
         </geometry>
-        <material name="red"/>
+        <material name="white"/>
+      </visual>
+
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
+    <!-- Hokuyo Laser -->
+    <link name="hokuyo_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
       </visual>
 
       <inertial>
@@ -297,11 +319,16 @@
       <origin xyz="0 0 0" rpy="0 ${DEG2RAD * 90} 0"/>
     </joint>
 
-   <joint name="camera_joint" type="fixed">
-      <axis xyz="0 0 0" />
-      <origin xyz="0 0 0" rpy="0 30 0"/>
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0 0 0.025" rpy="0 -1.5708 0"/>
       <parent link="${prefix}tool0"/>
       <child link="camera_link"/>
+    </joint>
+
+    <joint name="hokuyo_joint" type="fixed">
+      <origin xyz="0 0.05 0" rpy="0 0 0"/>
+      <parent link="camera_link"/>
+      <child link="hokuyo_link"/>
     </joint>
 
 
@@ -310,12 +337,12 @@
 
  -->
     <!-- ROS base_link to KUKA $ROBROOT coordinate system transform -->
-    <link name="${prefix}base" />
+<!--     <link name="${prefix}base" />
     <joint name="${prefix}base_link-base" type="fixed">
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <parent link="${prefix}base_link"/>
       <child link="${prefix}base"/>
-    </joint>
+    </joint> -->
 
   </xacro:macro>
 
