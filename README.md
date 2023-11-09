@@ -7,7 +7,7 @@ Create a catkin workspace following the intructions: [catkin workspace](http://w
 
 Make sure that you have added the following lines at the end of your ~/.bashrc file:
 ```
-source /opt/ros/noetic/setup.bash
+source /opt/ros/melodic/setup.bash
 source ~/catkin_ws/devel/setup.bash
 ```
 Go to your ~/catkin_ws/src path:
